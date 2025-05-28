@@ -20,6 +20,12 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging:3.0.0")
     implementation("io.ktor:ktor-server-content-negotiation:3.0.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0")
+    implementation("org.postgresql:postgresql:42.7.3")
+    implementation("org.jetbrains.exposed:exposed-core:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.49.0")
+    implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.49.0")
+    implementation("com.zaxxer:HikariCP:5.1.0")
 }
 
 application {
