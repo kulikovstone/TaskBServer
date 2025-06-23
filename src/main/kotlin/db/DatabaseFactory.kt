@@ -1,8 +1,10 @@
 package com.mkulikov.taskb.server.db
 
+import com.mkulikov.taskb.server.dto.Groups
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
@@ -23,8 +25,7 @@ object DatabaseFactory {
         Database.connect(dataSource)
 
         transaction {
-            // Здесь можно создавать таблицы (если используешь DAO/DSL)
-            // SchemaUtils.create(Users) — пример
+            SchemaUtils.create(Groups)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.mkulikov.taskb.server
 
 import com.mkulikov.taskb.server.db.DatabaseFactory
+import com.mkulikov.taskb.server.route.groupRoutes
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -59,6 +60,8 @@ fun Application.configureRouting() {
                 call.respondText("DB connection FAILED ❌: ${e.message}")
             }
         }
+
+        groupRoutes()
     }
 }
 
