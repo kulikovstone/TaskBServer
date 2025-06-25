@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build fat JAR
-        run: ./gradlew clean shadowJar
+        run: ./gradlew shadowJar
 
       - name: Copy jar to server
         uses: appleboy/scp-action@v0.1.7
