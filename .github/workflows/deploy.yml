@@ -23,7 +23,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build fat JAR
-        run: ./gradlew shadowJar
+        run: ./gradlew clean shadowJar
 
       - name: Copy jar to server
         uses: appleboy/scp-action@v0.1.7
