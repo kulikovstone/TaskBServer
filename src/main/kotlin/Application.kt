@@ -12,6 +12,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
+private const val CODE_VERSION = "1.0"
+
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         DatabaseFactory.init()
@@ -33,7 +35,9 @@ fun Application.configureLogging() {
 
 fun Application.configureRouting() {
     routing {
-
+        get("/test") {
+            call.respondText("TaskB server is running...\nVersion: $CODE_VERSION")
+        }
 
         // Ендпойнт для проверки базы данных
         get("/db-check") {
