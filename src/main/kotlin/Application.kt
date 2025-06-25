@@ -8,10 +8,8 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun main() {
@@ -35,19 +33,7 @@ fun Application.configureLogging() {
 
 fun Application.configureRouting() {
     routing {
-        get("/hello") {
-            call.respondText("Hello world")
-        }
 
-        post("/greet") {
-            val name = call.receive<String>()
-            call.respondText("Hello, $name!")
-        }
-
-        post("/greet-json") {
-            val request = call.receive<GreetRequest>()
-            call.respond(GreetResponse(greet = "Hello, ${request.name}!"))
-        }
 
         // Ендпойнт для проверки базы данных
         get("/db-check") {
@@ -64,13 +50,3 @@ fun Application.configureRouting() {
         groupRoutes()
     }
 }
-
-@Serializable
-data class GreetRequest(
-    val name: String
-)
-
-@Serializable
-data class GreetResponse(
-    val greet: String
-)
