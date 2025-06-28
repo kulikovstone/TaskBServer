@@ -23,7 +23,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build fat JAR
-        run: ./gradlew shadowJar
+        run: ./gradlew clean shadowJar
 
       - name: Copy jar to server
         uses: appleboy/scp-action@v0.1.7
@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           source: "build/libs/TaskBServer-all.jar"
-          target: "/home/TaskBServer/"
+          target: "/home/TaskBServer/TaskBServer-all.jar"
 
       - name: Restart systemd service
         uses: appleboy/ssh-action@v0.1.10
