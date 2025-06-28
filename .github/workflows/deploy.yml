@@ -32,7 +32,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           source: "build/libs/TaskBServer-all.jar"
-          target: "/home/TaskBServer/TaskBServer-all.jar"
+          target: "/home/TaskBServer/"
+          strip_components: 2
+          overwrite: true
 
       - name: Restart systemd service
         uses: appleboy/ssh-action@v0.1.10
