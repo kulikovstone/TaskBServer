@@ -14,6 +14,7 @@ fun main() {
         DatabaseFactory.init()
         configureSerialization()
         configureLogging()
+        configureSecurity()
         configureRouting()
     }.start(wait = true)
 }
