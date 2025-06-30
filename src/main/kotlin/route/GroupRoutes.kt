@@ -9,14 +9,12 @@ import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Route.groupRoutes() {
-    route("/groups") {
-        getAllGroups()
-        addGroup()
-    }
+    getAllGroups()
+    addGroup()
 }
 
 private fun Route.getAllGroups() {
-    get {
+    get("/groups") {
         val groups = transaction {
             GroupEntity.all().map { it.toDto() }
         }
@@ -25,7 +23,7 @@ private fun Route.getAllGroups() {
 }
 
 private fun Route.addGroup() {
-    post {
+    post("/groups") {
         val request = call.receive<CreateGroupRequest>()
         val created = transaction {
             GroupEntity.new {
