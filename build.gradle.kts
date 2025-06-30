@@ -26,6 +26,9 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:0.49.0")
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.49.0")
     implementation("com.zaxxer:HikariCP:5.1.0")
+    implementation("at.favre.lib:bcrypt:0.9.0") // BCrypt‑хеширование
+    implementation("io.ktor:ktor-server-auth:3.0.0") // Ktor Authentication
+    implementation("io.ktor:ktor-server-auth-jwt:3.0.0") // JWT-провайдер
 }
 
 application {
