@@ -20,13 +20,24 @@ class UserEntity(id: EntityID<Int>) : IntEntity(id) {
 }
 
 @Serializable
-data class UserDto(val id: Int, val username: String)
+data class UserDto(
+    val id: Int,
+    val username: String,
+)
 
 @Serializable
-data class CreateUserRequest(val username: String, val password: String)
+data class CreateUserRequest(
+    val username: String,
+    val password: String,
+)
 
 @Serializable
-data class LoginRequest(val username: String, val password: String)
+data class LoginRequest(
+    val username: String,
+    val password: String,
+)
 
 @Serializable
-data class LoginResponse(val token: String)
+data class LoginResponse(
+    val token: String,
+)
