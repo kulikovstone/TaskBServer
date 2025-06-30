@@ -43,4 +43,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
+            sudo systemctl daemon-reload
             systemctl restart taskbserver
