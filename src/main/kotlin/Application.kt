@@ -1,18 +1,13 @@
 package com.mkulikov.taskb.server
 
+import com.mkulikov.taskb.server.config.configureLogging
+import com.mkulikov.taskb.server.config.configureRouting
+import com.mkulikov.taskb.server.config.configureSecurity
+import com.mkulikov.taskb.server.config.configureSerialization
 import com.mkulikov.taskb.server.db.DatabaseFactory
-import com.mkulikov.taskb.server.route.groupRoutes
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.server.plugins.calllogging.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import org.jetbrains.exposed.sql.transactions.transaction
 
-private const val CODE_VERSION = "1.0"
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
@@ -21,36 +16,4 @@ fun main() {
         configureLogging()
         configureRouting()
     }.start(wait = true)
-}
-
-fun Application.configureSerialization() {
-    install(ContentNegotiation) {
-        json()
-    }
-}
-
-fun Application.configureLogging() {
-    install(CallLogging)
-}
-
-fun Application.configureRouting() {
-    routing {
-        get("/test") {
-            call.respondText("TaskB server is running...\nVersion: $CODE_VERSION")
-        }
-
-        // Ендпойнт для проверки базы данных
-        get("/db-check") {
-            try {
-                transaction {
-                    exec("SELECT 1")
-                }
-                call.respondText("DB connection OK ✅")
-            } catch (e: Exception) {
-                call.respondText("DB connection FAILED ❌: ${e.message}")
-            }
-        }
-
-        groupRoutes()
-    }
 }
