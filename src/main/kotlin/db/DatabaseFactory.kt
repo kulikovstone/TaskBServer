@@ -1,6 +1,8 @@
 package com.mkulikov.taskb.server.db
 
 import com.mkulikov.taskb.server.dto.Groups
+import com.mkulikov.taskb.server.dto.Tasks
+import com.mkulikov.taskb.server.dto.Users
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
@@ -25,7 +27,7 @@ object DatabaseFactory {
         Database.connect(dataSource)
 
         transaction {
-            SchemaUtils.create(Groups)
+            SchemaUtils.create(Users, Groups, Tasks)
         }
     }
 }
