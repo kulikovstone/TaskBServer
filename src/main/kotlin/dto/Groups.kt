@@ -7,7 +7,8 @@ import org.jetbrains.exposed.dao.id.EntityID
 
 object Groups : IntIdTable("groups") {
     val name = varchar("name", 255)
-    val color = varchar("color", 9) // hex format: "#RRGGBBAA"
+    val color = integer("color")
+    val user = reference("user_id", Users)
 }
 
 class GroupEntity(id: EntityID<Int>) : IntEntity(id) {
@@ -15,19 +16,24 @@ class GroupEntity(id: EntityID<Int>) : IntEntity(id) {
 
     var name by Groups.name
     var color by Groups.color
+    var user by UserEntity referencedOn Groups.user
 
-    fun toDto() = GroupDto(id.value, name, color)
+    fun toDto() = GroupDto(
+        id = id.value,
+        name = name,
+        color = color
+    )
 }
 
 @Serializable
 data class GroupDto(
     val id: Int,
     val name: String,
-    val color: String
+    val color: Int,
 )
 
 @Serializable
 data class CreateGroupRequest(
     val name: String,
-    val color: String
+    val color: Int
 )
