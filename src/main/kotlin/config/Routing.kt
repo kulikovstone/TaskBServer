@@ -3,6 +3,7 @@ package com.mkulikov.taskb.server.config
 import com.mkulikov.taskb.server.dto.UserDto
 import com.mkulikov.taskb.server.route.authRoutes
 import com.mkulikov.taskb.server.route.groupRoutes
+import com.mkulikov.taskb.server.route.taskRoutes
 import com.mkulikov.taskb.server.route.testRoutes
 import io.ktor.server.application.*
 import io.ktor.server.auth.authenticate
@@ -15,15 +16,17 @@ fun Application.configureRouting() {
     routing {
         testRoutes()
         authRoutes()
-        groupRoutes()
 
         authenticate("auth-jwt") {
             get("/me") {
                 val principal = call.principal<JWTPrincipal>()!!
-                val userId     = principal.payload.getClaim("userId").asInt()
-                val username   = principal.payload.getClaim("username").asString()
+                val userId = principal.payload.getClaim("userId").asInt()
+                val username = principal.payload.getClaim("username").asString()
                 call.respond(UserDto(userId, username))
             }
+
+            groupRoutes()
+            taskRoutes()
         }
     }
 }
