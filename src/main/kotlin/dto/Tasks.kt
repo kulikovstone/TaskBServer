@@ -59,6 +59,16 @@ data class TaskDto(
 data class CreateTaskRequest(
     val name: String,
     val description: String? = null,
+    val createdAt: LocalDateTime,
     val targetDate: LocalDate? = null,
+    val groupId: Int? = null
+)
+
+@Serializable
+data class UpdateTaskRequest(
+    val name: String? = null,
+    val description: String? = null,
+    val targetDate: LocalDate? = null,
+    val completedAt: LocalDateTime? = null,
     val groupId: Int? = null
 )
